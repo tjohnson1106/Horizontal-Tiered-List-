@@ -1,20 +1,26 @@
 import * as React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { reorderColors } from "../reorder";
+import { generate } from "shortid";
+import { reorderRows } from "../reorder";
 import { ColorType } from "../types";
 import { AuthorList } from "./AuthorList";
 
+const aId = generate();
+const unrankedId = generate();
+
 export const ColorMap = () => {
-  const [colorSet, setColors] = React.useState<ColorType>({
-    a: [],
-    b: [],
-    c: [],
-    unranked: [
-      "https://images.pexels.com/photos/2126090/pexels-photo-2126090.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "https://images.pexels.com/photos/2105262/pexels-photo-2105262.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-    ]
-  });
+  const [rows, setRows] = React.useState([
+    { id: aId, label: "a", urls: [] },
+    {
+      id: unrankedId,
+      label: "unranked",
+      urls: [
+        "https://images.pexels.com/photos/2126090/pexels-photo-2126090.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "https://images.pexels.com/photos/2105262/pexels-photo-2105262.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+      ]
+    }
+  ]);
 
   return (
     <DragDropContext
@@ -24,17 +30,31 @@ export const ColorMap = () => {
           return;
         }
 
-        setColors(reorderColors(colorSet, source, destination));
+        setRows(reorderRows(rows, source, destination));
       }}
     >
       <div>
-        {Object.entries(colorSet).map(([k, v]) => (
+        <button
+          onClick={() => {
+            setRows([
+              {
+                id: generate(),
+                label: "",
+                urls: []
+              },
+              ...rows
+            ]);
+          }}
+        >
+          add row
+        </button>
+        {rows.map((row) => (
           <AuthorList
             internalScroll
-            key={k}
-            listId={k}
+            key={row.id}
+            listId={row.id}
             listType="CARD"
-            urls={v}
+            row={row}
           />
         ))}
       </div>

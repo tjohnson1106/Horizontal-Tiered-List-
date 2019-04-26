@@ -1,15 +1,17 @@
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
+import { Row } from "../types";
+
 interface Props {
-  urls: string[];
+  row: Row;
   listId: string;
   listType?: string;
   internalScroll?: boolean;
   isCombineEnabled?: boolean;
 }
 
-export const AuthorList: React.FC<Props> = ({ listId, listType, urls }) => {
+export const AuthorList: React.FC<Props> = ({ listId, listType, row }) => {
   return (
     <Droppable
       droppableId={listId}
@@ -28,7 +30,7 @@ export const AuthorList: React.FC<Props> = ({ listId, listType, urls }) => {
             }}
             ref={dropProvided.innerRef}
           >
-            {urls.map((url, index) => (
+            {row.urls.map((url, index) => (
               <Draggable key={url} draggableId={url} index={index}>
                 {(dragProvided) => (
                   <div
