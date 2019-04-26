@@ -2,7 +2,7 @@ import * as React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { generate } from "shortid";
-import { reorderRows } from "../reorder";
+import { reorderRows, reorder } from "../reorder";
 import { AuthorList } from "./AuthorList";
 import images from "../images.json";
 
@@ -45,8 +45,10 @@ export const ColorMap = () => {
         >
           add row
         </button>
-        {rows.map((row) => (
+        {rows.map((row, i) => (
           <AuthorList
+            onUp={() => setRows(reorder(rows, i, i - 1))}
+            onDown={() => setRows(reorder(rows, i, i + 1))}
             internalScroll
             key={row.id}
             listId={row.id}

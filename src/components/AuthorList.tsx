@@ -9,24 +9,39 @@ interface Props {
   listType?: string;
   internalScroll?: boolean;
   isCombineEnabled?: boolean;
+  onUp: () => void;
+  onDown: () => void;
 }
 
-export const AuthorList: React.FC<Props> = ({ listId, listType, row }) => {
+export const AuthorList: React.FC<Props> = ({
+  listId,
+  listType,
+  row,
+  onDown,
+  onUp
+}) => {
   return (
-    <Droppable
-      droppableId={listId}
-      type={listType}
-      direction="horizontal"
-      isCombineEnabled={false}
-    >
-      {(dropProvided) => (
-        <div {...dropProvided.droppableProps}>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <div>
+        <button onClick={onUp}>up</button>
+        <button onClick={onDown}>down</button>
+      </div>
+      <Droppable
+        droppableId={listId}
+        type={listType}
+        direction="horizontal"
+        isCombineEnabled={false}
+      >
+        {(dropProvided) => (
           <div
+            {...dropProvided.droppableProps}
             style={{
+              flex: 1,
               display: "flex",
               backgroundColor: "pink",
               margin: 20,
-              minHeight: 60
+              minHeight: 60,
+              overflowX: "auto"
             }}
             ref={dropProvided.innerRef}
           >
@@ -45,8 +60,8 @@ export const AuthorList: React.FC<Props> = ({ listId, listType, row }) => {
             ))}
             {dropProvided.placeholder}
           </div>
-        </div>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+    </div>
   );
 };
