@@ -3,8 +3,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import { generate } from "shortid";
 import { reorderRows } from "../reorder";
-import { ColorType } from "../types";
 import { AuthorList } from "./AuthorList";
+import images from "../images.json";
 
 const aId = generate();
 const unrankedId = generate();
@@ -15,10 +15,7 @@ export const ColorMap = () => {
     {
       id: unrankedId,
       label: "unranked",
-      urls: [
-        "https://images.pexels.com/photos/2126090/pexels-photo-2126090.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "https://images.pexels.com/photos/2105262/pexels-photo-2105262.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-      ]
+      urls: images
     }
   ]);
 
