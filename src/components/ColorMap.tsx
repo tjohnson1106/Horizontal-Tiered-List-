@@ -3,6 +3,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import { reorderColors } from "../reorder";
 import { ColorType } from "../types";
+import { AuthorList } from "./AuthorList";
 
 export const ColorMap = () => {
   const [colorSet, setColors] = React.useState<ColorType>({

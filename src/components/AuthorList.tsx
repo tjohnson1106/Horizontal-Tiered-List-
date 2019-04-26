@@ -18,23 +18,22 @@ export class AuthorList extends Component<Props> {
 
     return (
       <div>
-        <DropZone ref={dropProvided.innerRef}>
-          {quotes.map((quote: Quote, index: number) => (
-            <Draggable key={quote.id} draggableId={quote.id} index={index}>
-              {(
-                dragProvided: DraggableProvided,
-                dragSnapshot: DraggableStateSnapshot
-              ) => (
-                <Author
-                  author={quote.author}
-                  provided={dragProvided}
-                  snapshot={dragSnapshot}
-                />
+        <div style={{ display: "flex" }} ref={dropProvided.innerRef}>
+          {colors.map((color, index) => (
+            <Draggable key={color} draggableId={color} index={index}>
+              {(dragProvided) => (
+                <div
+                  {...dragProvided.dragHandleProps}
+                  {...dragProvided.draggableProps}
+                  ref={dragProvided.innerRef}
+                >
+                  <div style={{ backgroundColor: color }}>{color}</div>
+                </div>
               )}
             </Draggable>
           ))}
           {dropProvided.placeholder}
-        </DropZone>
+        </div>
       </div>
     );
   };
