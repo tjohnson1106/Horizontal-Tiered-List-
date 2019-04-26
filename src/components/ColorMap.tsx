@@ -7,9 +7,9 @@ import { AuthorList } from "./AuthorList";
 
 export const ColorMap = () => {
   const [colorSet, setColors] = React.useState<ColorType>({
-    a: ["blue", "red"],
+    a: ["blue", "red", "yellow"],
     b: ["pink"],
-    c: ["green"]
+    c: ["green", "tan"]
   });
 
   return (
