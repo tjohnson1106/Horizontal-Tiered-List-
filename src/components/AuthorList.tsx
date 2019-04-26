@@ -2,14 +2,14 @@ import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 interface Props {
-  colors: string[];
+  urls: string[];
   listId: string;
   listType?: string;
   internalScroll?: boolean;
   isCombineEnabled?: boolean;
 }
 
-export const AuthorList: React.FC<Props> = ({ listId, listType, colors }) => {
+export const AuthorList: React.FC<Props> = ({ listId, listType, urls }) => {
   return (
     <Droppable
       droppableId={listId}
@@ -19,25 +19,29 @@ export const AuthorList: React.FC<Props> = ({ listId, listType, colors }) => {
     >
       {(dropProvided) => (
         <div {...dropProvided.droppableProps}>
-          <div>
-            <div>
-              <div style={{ display: "flex" }} ref={dropProvided.innerRef}>
-                {colors.map((color, index) => (
-                  <Draggable key={color} draggableId={color} index={index}>
-                    {(dragProvided) => (
-                      <div
-                        {...dragProvided.dragHandleProps}
-                        {...dragProvided.draggableProps}
-                        ref={dragProvided.innerRef}
-                      >
-                        <div style={{ backgroundColor: color }}>{color}</div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {dropProvided.placeholder}
-              </div>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              backgroundColor: "pink",
+              margin: 20,
+              minHeight: 60
+            }}
+            ref={dropProvided.innerRef}
+          >
+            {urls.map((url, index) => (
+              <Draggable key={url} draggableId={url} index={index}>
+                {(dragProvided) => (
+                  <div
+                    {...dragProvided.dragHandleProps}
+                    {...dragProvided.draggableProps}
+                    ref={dragProvided.innerRef}
+                  >
+                    <img style={{ width: 50 }} src={url} />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {dropProvided.placeholder}
           </div>
         </div>
       )}

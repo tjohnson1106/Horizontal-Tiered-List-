@@ -7,9 +7,13 @@ import { AuthorList } from "./AuthorList";
 
 export const ColorMap = () => {
   const [colorSet, setColors] = React.useState<ColorType>({
-    a: ["blue", "red", "yellow"],
-    b: ["pink"],
-    c: ["green", "tan"]
+    a: [],
+    b: [],
+    c: [],
+    unranked: [
+      "https://images.pexels.com/photos/2126090/pexels-photo-2126090.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "https://images.pexels.com/photos/2105262/pexels-photo-2105262.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ]
   });
 
   return (
@@ -30,7 +34,7 @@ export const ColorMap = () => {
             key={k}
             listId={k}
             listType="CARD"
-            colors={v}
+            urls={v}
           />
         ))}
       </div>
