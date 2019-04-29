@@ -19,6 +19,10 @@ export const ColorMap = () => {
     }
   ]);
 
+  React.useEffect(() => {
+    localStorage.setItem("tier-list", JSON.stringify(rows));
+  });
+
   return (
     <DragDropContext
       onDragEnd={({ destination, source }) => {
