@@ -19,6 +19,14 @@ export const ColorMap = () => {
     }
   ]);
 
+  // run first
+  React.useEffect(() => {
+    const data = localStorage.getItem("tier-list");
+    if (data) {
+      setRows(JSON.parse(data));
+    }
+  }, []);
+
   React.useEffect(() => {
     localStorage.setItem("tier-list", JSON.stringify(rows));
   });
