@@ -47,6 +47,18 @@ export const ColorMap = () => {
         </button>
         {rows.map((row, i) => (
           <AuthorList
+            onLabelChange={(newText) =>
+              setRows(
+                rows.map((x) =>
+                  x.id === row.id
+                    ? {
+                        ...row,
+                        label: newText
+                      }
+                    : x
+                )
+              )
+            }
             onUp={() => setRows(reorder(rows, i, i - 1))}
             onDown={() => setRows(reorder(rows, i, i + 1))}
             internalScroll

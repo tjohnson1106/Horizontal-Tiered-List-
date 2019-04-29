@@ -11,6 +11,7 @@ interface Props {
   isCombineEnabled?: boolean;
   onUp: () => void;
   onDown: () => void;
+  onLabelChange: (newText: string) => void;
 }
 
 export const AuthorList: React.FC<Props> = ({
@@ -18,13 +19,22 @@ export const AuthorList: React.FC<Props> = ({
   listType,
   row,
   onDown,
-  onUp
+  onUp,
+  onLabelChange
 }) => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <div>
-        <button onClick={onUp}>up</button>
-        <button onClick={onDown}>down</button>
+        <div>
+          <button onClick={onUp}>up</button>
+        </div>
+        <input
+          value={row.label}
+          onChange={(e) => onLabelChange(e.target.value)}
+        />
+        <div>
+          <button onClick={onDown}>down</button>
+        </div>
       </div>
       <Droppable
         droppableId={listId}
